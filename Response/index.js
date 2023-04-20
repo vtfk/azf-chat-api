@@ -11,15 +11,12 @@ const configuration = new Configuration({
 module.exports = async function (context, req) {
   const ver = verifyToken(req.headers.authorization)
   if (!ver.verified) return { status: 401, body: `You are not authorized to view this resource, ${ver.msg}` }
+  if (!(ver.roles.includes('chatVTFK.chatCompletion'))) return {status: 401, body: `You are not authorized to view this resource, you do not have the correct role(s)`}
 
   const openai = new OpenAIApi(configuration);
 
   const priorMessages = req.body.priorMessages
   const currentMessage = req.body.message
-  const isInitializing = req.body.message
-
-  console.log(currentMessage)
-  console.log(priorMessages)
 
   const initialMessage = {
     role: 'system',
