@@ -3,6 +3,7 @@ const { azfHandleResponse, azfHandleError } = require('@vtfk/responsehandlers');
 const { Configuration, OpenAIApi } = require("openai");
 const { verifyToken } = require('../sharedCode/utils/verifyToken')
 const config = require('../config');
+const marked = require('marked')
 
 const configuration = new Configuration({
     apiKey: config.openAI.apikey,
@@ -20,7 +21,7 @@ module.exports = async function (context, req) {
 
   const initialMessage = {
     role: 'system',
-    content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK'
+    content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK. Du skal alltid svare med markdown.'
   }
 
   try {
@@ -37,7 +38,6 @@ module.exports = async function (context, req) {
       })
       
       if (completion.data) {
-        console.log(completion.data.choices[0].message)
         if (completion.data.choices[0].message) {
           return await azfHandleResponse(completion.data.choices[0].message, context, req, 200)
         }
