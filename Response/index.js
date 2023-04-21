@@ -3,7 +3,6 @@ const { azfHandleResponse, azfHandleError } = require('@vtfk/responsehandlers');
 const { Configuration, OpenAIApi } = require("openai");
 const { verifyToken } = require('../sharedCode/utils/verifyToken')
 const config = require('../config');
-const marked = require('marked')
 
 const configuration = new Configuration({
     apiKey: config.openAI.apikey,
