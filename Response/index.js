@@ -20,7 +20,7 @@ module.exports = async function (context, req) {
 
   const initialMessage = {
     role: 'system',
-    content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK. Du skal alltid svare med markdown.'
+    content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du skal alltid svare med markdown, men skal ikke nevne dette i introduksjonen.'
   }
 
   try {
