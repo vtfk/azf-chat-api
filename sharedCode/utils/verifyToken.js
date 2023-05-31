@@ -26,15 +26,15 @@ const verifyRoles = (token, roles) => {
   return false
 }
 
-const verifyUpn = (token) => {
-  if (!token) {
-    logger('error', ['verifyToken', 'Unauthorized', 'missing token'])
-    return false
-  }
-  const { upn } = jwt.decode(token.replace('Bearer ', ''))
-  if (!upn) return false
-  return upn.endsWith(msal.validUpnSuffix)
-}
+// const verifyUpn = (token) => {
+//   if (!token) {
+//     logger('error', ['verifyToken', 'Unauthorized', 'missing token'])
+//     return false
+//   }
+//   const { upn } = jwt.decode(token.replace('Bearer ', ''))
+//   if (!upn) return false
+//   return upn.endsWith(msal.validUpnSuffix)
+// }
 
 const verifyToken = (token) => {
   if (!token) {
@@ -54,15 +54,15 @@ const verifyToken = (token) => {
       msg: 'Token not valid, does not contain upn'
     }
   }
-  const verifiedUpn = upn.endsWith(msal.validUpnSuffix)
-  if (!verifiedUpn) {
-    return {
-      verified: false,
-      upn,
-      roles: [],
-      msg: 'Not valid upn suffix'
-    }
-  }
+  // const verifiedUpn = upn.endsWith(msal.validUpnSuffix)
+  // if (!verifiedUpn) {
+  //   return {
+  //     verified: false,
+  //     upn,
+  //     roles: [],
+  //     msg: 'Not valid upn suffix'
+  //   }
+  // }
   return {
     verified: true,
     upn,
@@ -110,4 +110,4 @@ const isLeader = (token, structures, maxLevelAbove = 1) => {
   return false
 }
 
-module.exports = { verifyTokenClaims, verifyRoles, verifyUpn, verifyToken, verifyAppToken, isLeader }
+module.exports = { verifyTokenClaims, verifyRoles, verifyToken, verifyAppToken, isLeader }
