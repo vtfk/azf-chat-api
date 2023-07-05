@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+      - prod-test
 env:
   AZURE_FUNCTIONAPP_NAME: TEST-FUNC-CHAT-API
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
