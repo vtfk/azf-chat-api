@@ -45,7 +45,11 @@ const verifyToken = (token) => {
       msg: 'No token'
     }
   }
-  const { upn, roles } = jwt.decode(token.replace('Bearer ', ''))
+  let { upn, roles, unique_name } = jwt.decode(token.replace('Bearer ', ''))
+  //UPN kommer ikke fra TFK og VFK brukere. 
+  if(!upn && (unique_name.endsWith('@telemarkfylke.no') || unique_name.endsWith('@vestfoldfylke.no'))) {
+    upn = unique_name
+  }
   if (!upn) {
     return {
       verified: false,
